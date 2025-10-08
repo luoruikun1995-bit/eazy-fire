@@ -1,0 +1,26 @@
+{
+  "name": "eazy-fire",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "framer-motion": "^10.16.4",
+    "next": "14.2.3",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.64",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.5.4",
+    "typescript": "^5.4.5"
+  }
+}

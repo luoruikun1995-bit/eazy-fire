@@ -1,11 +1,11 @@
 export const baseCurrency = "USD";
 
 export const europeanPensionMedians = [
-  { country: "德国", monthlyPension: 1675 },
-  { country: "法国", monthlyPension: 1565 },
-  { country: "西班牙", monthlyPension: 1240 },
-  { country: "意大利", monthlyPension: 1380 },
-  { country: "荷兰", monthlyPension: 1970 }
+  { country: "德国", annualPension: 20100 },
+  { country: "法国", annualPension: 18780 },
+  { country: "西班牙", annualPension: 14880 },
+  { country: "意大利", annualPension: 16560 },
+  { country: "荷兰", annualPension: 23640 }
 ];
 
 export const fireCityCivilServiceIncome = [

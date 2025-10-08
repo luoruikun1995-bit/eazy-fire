@@ -216,7 +216,7 @@ export default function HomePage() {
                   <div key={item.country} className={styles.referenceItem}>
                     <span>{item.country}</span>
                     <span>
-                      {formatterCurrency.format(item.monthlyPension)} / 月
+                      {formatterCurrency.format(item.annualPension)} / 年
                     </span>
                   </div>
                 ))}

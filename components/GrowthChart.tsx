@@ -13,6 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 import { baseCurrency } from "../config/referenceData";
+import { getTranslation, type Language } from "../lib/translations";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
@@ -20,6 +21,7 @@ interface GrowthChartProps {
   labels: string[];
   nominal: number[];
   real: number[];
+  language: Language;
 }
 
 const tooltipFormatter = new Intl.NumberFormat("en-US", {
@@ -28,40 +30,52 @@ const tooltipFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-export function GrowthChart({ labels, nominal, real }: GrowthChartProps) {
+export function GrowthChart({ labels, nominal, real, language }: GrowthChartProps) {
   const data = useMemo(() => {
     return {
       labels,
       datasets: [
         {
-          label: "名义资产",
+          label: getTranslation(language, 'nominalAssets'),
           data: nominal,
           tension: 0.4,
           borderColor: "rgba(79, 70, 229, 1)",
           borderWidth: 2.5,
+          borderDash: [5, 5],
           pointRadius: 0,
+          pointHoverRadius: 6,
+          pointBackgroundColor: "rgba(79, 70, 229, 1)",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 2,
           fill: {
             target: "origin",
             above: "rgba(79, 70, 229, 0.2)"
           }
         },
         {
-          label: "经通胀调整",
+          label: getTranslation(language, 'inflationAdjusted'),
           data: real,
           tension: 0.4,
           borderColor: "rgba(16, 185, 129, 1)",
-          borderWidth: 2,
+          borderWidth: 2.5,
           pointRadius: 0,
-          borderDash: [6, 6]
+          pointHoverRadius: 6,
+          pointBackgroundColor: "rgba(16, 185, 129, 1)",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 2
         }
       ]
     };
-  }, [labels, nominal, real]);
+  }, [labels, nominal, real, language]);
 
   const options = useMemo(() => {
     return {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: {
+        mode: 'index' as const,
+        intersect: false,
+      },
       plugins: {
         legend: {
           labels: {
@@ -71,16 +85,32 @@ export function GrowthChart({ labels, nominal, real }: GrowthChartProps) {
           }
         },
         tooltip: {
-          backgroundColor: "rgba(12, 18, 33, 0.9)",
-          borderColor: "rgba(79, 70, 229, 0.45)",
-          borderWidth: 1,
+          backgroundColor: "rgba(12, 18, 33, 0.95)",
+          borderColor: "rgba(79, 70, 229, 0.6)",
+          borderWidth: 1.5,
           titleColor: "#f4f6fb",
           bodyColor: "#f4f6fb",
-          displayColors: false,
+          displayColors: true,
+          cornerRadius: 8,
+          titleMarginBottom: 8,
+          bodySpacing: 4,
+          padding: 12,
           callbacks: {
+            title: (context: any) => {
+              return `${getTranslation(language, 'time')}${context[0].label}年`;
+            },
             label: (context: any) => {
               const value = context.parsed.y;
               return `${context.dataset.label}: ${tooltipFormatter.format(value)}`;
+            },
+            afterBody: (context: any) => {
+              if (context.length >= 2) {
+                const nominalValue = context.find((ctx: any) => ctx.dataset.label === getTranslation(language, 'nominalAssets'))?.parsed.y || 0;
+                const realValue = context.find((ctx: any) => ctx.dataset.label === getTranslation(language, 'inflationAdjusted'))?.parsed.y || 0;
+                const diff = nominalValue - realValue;
+                return [``, `${getTranslation(language, 'inflationImpact')}${tooltipFormatter.format(diff)}`];
+              }
+              return [];
             }
           }
         }
@@ -113,9 +143,15 @@ export function GrowthChart({ labels, nominal, real }: GrowthChartProps) {
             color: "rgba(255, 255, 255, 0.05)"
           }
         }
+      },
+      elements: {
+        point: {
+          hoverRadius: 6,
+          hoverBorderWidth: 3
+        }
       }
     };
-  }, []);
+  }, [language]);
 
   return (
     <div style={{ width: "100%", height: 320 }}>

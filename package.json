@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npm run lint && npm run build",
+    "preview": "npm run build && npm run start"
   },
   "dependencies": {
     "chart.js": "^4.4.1",

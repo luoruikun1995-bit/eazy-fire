@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
-import { baseCurrency } from "../config/referenceData";
+import { baseCurrency } from "../config";
 import { getTranslation, type Language } from "../lib/translations";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
@@ -21,6 +21,7 @@ interface GrowthChartProps {
   labels: string[];
   nominal: number[];
   real: number[];
+  netWorth: number[];
   language: Language;
 }
 
@@ -30,7 +31,7 @@ const tooltipFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-export function GrowthChart({ labels, nominal, real, language }: GrowthChartProps) {
+export function GrowthChart({ labels, nominal, real, netWorth, language }: GrowthChartProps) {
   const data = useMemo(() => {
     return {
       labels,
@@ -63,10 +64,22 @@ export function GrowthChart({ labels, nominal, real, language }: GrowthChartProp
           pointBackgroundColor: "rgba(16, 185, 129, 1)",
           pointBorderColor: "#ffffff",
           pointBorderWidth: 2
+        },
+        {
+          label: getTranslation(language, 'netWorthAfterExpenses'),
+          data: netWorth,
+          tension: 0.4,
+          borderColor: "rgba(239, 68, 68, 1)",
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 6,
+          pointBackgroundColor: "rgba(239, 68, 68, 1)",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 2
         }
       ]
     };
-  }, [labels, nominal, real, language]);
+  }, [labels, nominal, real, netWorth, language]);
 
   const options = useMemo(() => {
     return {

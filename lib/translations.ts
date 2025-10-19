@@ -31,21 +31,42 @@ export interface Translations {
   monthlyExpenses: string;
   
   // 参考数据
-  dataLastUpdated: string;
-  europeanPensionMedians: string;
-  fireCityCivilServiceIncome: string;
-  popularFireCitiesCivilServiceIncome: string;
+  closestPensionLevels: string;
   perYear: string;
+  
+  // 收入分析
+  incomeAnalysis: string;
+  selectCity: string;
+  selectLifestyle: string;
+  yourIncomeLevel: string;
+  incomePercentile: string;
+  lifestyleDescription: string;
+  
+  // 生活状态
+  single: string;
+  dinkCouple: string;
+  twoChildren: string;
   
   // 图表标签
   nominalAssets: string;
   inflationAdjusted: string;
+  netWorthAfterExpenses: string;
   time: string;
   inflationImpact: string;
   
   // 单位
   currency: string;
   percentage: string;
+  
+  // 时间单位
+  years: string;
+  months: string;
+  year: string;
+  month: string;
+  overYears: string;
+  
+  // 城市描述
+  cityDescriptions: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -74,19 +95,36 @@ export const translations: Record<Language, Translations> = {
     fireBudget: "FIRE 生活预算",
     monthlyExpenses: "月度支出",
     
-    dataLastUpdated: "数据更新时间：",
-    europeanPensionMedians: "欧洲主要国家退休金中位数",
-    fireCityCivilServiceIncome: "热门 FIRE 城市中级公务员收入",
-    popularFireCitiesCivilServiceIncome: "热门 FIRE 城市中级公务员收入",
+    closestPensionLevels: "相近收入水平",
     perYear: " / 年",
+    
+    incomeAnalysis: "收入水平分析",
+    selectCity: "选择城市",
+    selectLifestyle: "生活状态",
+    yourIncomeLevel: "您的收入水平",
+    incomePercentile: "收入分位数",
+    lifestyleDescription: "生活描述",
+    
+    single: "单身",
+    dinkCouple: "丁克夫妻",
+    twoChildren: "二孩家庭",
     
     nominalAssets: "名义资产",
     inflationAdjusted: "经通胀调整",
+    netWorthAfterExpenses: "扣除开销后净值",
     time: "时间: ",
     inflationImpact: "通胀影响: ",
     
     currency: "",
-    percentage: "%"
+    percentage: "%",
+    
+    years: "年",
+    months: "个月", 
+    year: "年",
+    month: "个月",
+    overYears: "超过 50 年",
+    
+    cityDescriptions: "城市描述"
   },
   
   EN: {
@@ -114,19 +152,36 @@ export const translations: Record<Language, Translations> = {
     fireBudget: "FIRE Budget",
     monthlyExpenses: "Monthly expenses",
     
-    dataLastUpdated: "Data last updated: ",
-    europeanPensionMedians: "European Pension Medians",
-    fireCityCivilServiceIncome: "Popular FIRE Cities Civil Service Income",
-    popularFireCitiesCivilServiceIncome: "Popular FIRE Cities Civil Service Income",
+    closestPensionLevels: "Similar Income Levels",
     perYear: " / year",
+    
+    incomeAnalysis: "Income Level Analysis",
+    selectCity: "Select City",
+    selectLifestyle: "Lifestyle",
+    yourIncomeLevel: "Your Income Level",
+    incomePercentile: "Income Percentile",
+    lifestyleDescription: "Lifestyle Description",
+    
+    single: "Single",
+    dinkCouple: "DINK Couple",
+    twoChildren: "Two Children Family",
     
     nominalAssets: "Nominal Assets",
     inflationAdjusted: "Inflation Adjusted",
+    netWorthAfterExpenses: "Net Worth After Expenses",
     time: "Time: ",
     inflationImpact: "Inflation Impact: ",
     
     currency: "",
-    percentage: "%"
+    percentage: "%",
+    
+    years: "years",
+    months: "months",
+    year: "year", 
+    month: "month",
+    overYears: "Over 50 years",
+    
+    cityDescriptions: "City Descriptions"
   }
 };
 
